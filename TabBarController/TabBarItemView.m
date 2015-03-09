@@ -8,6 +8,9 @@
 
 #import "TabBarItemView.h"
 
+#define TAB_BAR_ITEM_SELECTED_COLOR [UIColor colorWithRed:61.0 / 255.0 green:96.0 / 255.0 blue:254.0 / 255.0 alpha:1.0]
+#define TAB_BAR_ITEM_DESELECTED_COLOR [UIColor colorWithRed:136.0 / 255.0 green:136.0 / 255.0 blue:136.0 / 255.0 alpha:1.0]
+
 @implementation TabBarItemView
 
 - (void)awakeFromNib
@@ -64,10 +67,10 @@
 - (void)setTabBarItemSelected:(BOOL)isSelected
 {
     if (isSelected) {
-        self.titleLabel.textColor = [UIColor colorWithRed:61.0 / 255.0 green:96.0 / 255.0 blue:254.0 / 255.0 alpha:1.0];
+        self.titleLabel.textColor = TAB_BAR_ITEM_SELECTED_COLOR;
     }
     else {
-        self.titleLabel.textColor = [UIColor colorWithRed:136.0 / 255.0 green:136.0 / 255.0 blue:136.0 / 255.0 alpha:1.0];
+        self.titleLabel.textColor = TAB_BAR_ITEM_DESELECTED_COLOR;
     }
 }
 
