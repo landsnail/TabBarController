@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TabBarItem.h"
+
 @protocol TabBarItemViewDelegate <NSObject>
 
 @optional
@@ -15,12 +17,16 @@
 
 @end
 
-@interface TabBarItemView : UIView
+@interface TabBarItemView : UIView <TabBarItemDelegate>
 
+- (void)updateView;
+- (id)initWithItem:(TabBarItem *)item;
 - (void)setTabBarItemSelected:(BOOL)isSelected;
 
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *iconImage;
+
+@property (nonatomic, strong) TabBarItem *item;
 @property (nonatomic, weak) id <TabBarItemViewDelegate> delegate;
 @property (nonatomic, strong) NSLayoutConstraint *widthConstraint;
 

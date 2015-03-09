@@ -9,9 +9,8 @@
 #import "MoreViewController.h"
 
 #import "TabBarItemView.h"
-#import "TabBarController.h"
 
-@interface MoreViewController () <TabBarControllerDelegate>
+@interface MoreViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -30,12 +29,12 @@
     return self;
 }
 
-#pragma mark - CustomUITabBarControllerDelegate methods
+#pragma mark - TabBarControllerDelegate methods
 
 - (TabBarItemView *)tabBarItemView
 {
     TabBarItemView *tabBarItem = [TabBarController defaultTabBarItemView];
-    tabBarItem.title = @"More";
+    tabBarItem.item.title = @"More";
     
     return tabBarItem;
 }
@@ -57,7 +56,7 @@
     TabBarController *tabBarController = (TabBarController *)self.tabBarController;
     TabBarItemView *tabBarItemView = [tabBarController tabBarItemViewForViewController:self.viewControllers[ indexPath.row ]];
     
-    cell.textLabel.text = tabBarItemView.title;
+    cell.textLabel.text = tabBarItemView.item.title;
     
     cell.exclusiveTouch = YES;
     
@@ -69,6 +68,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIViewController *viewController = self.viewControllers[ indexPath.row ];
+    
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        NSArray *allVC = ((UINavigationController *)viewController).viewControllers;
+        viewController = [allVC firstObject];
+    }
     
     [self.navigationController pushViewController:viewController animated:YES];
 }

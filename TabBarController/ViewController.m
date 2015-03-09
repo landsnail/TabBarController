@@ -9,20 +9,15 @@
 #import "ViewController.h"
 
 #import "TabBarItemView.h"
-#import "TabBarController.h"
-
-@interface ViewController () <TabBarControllerDelegate>
-
-@end
 
 @implementation ViewController
 
-#pragma mark - CustomUITabBarControllerDelegate methods
+#pragma mark - TabBarControllerDelegate methods
 
 - (TabBarItemView *)tabBarItemView
 {
     TabBarItemView *tabBarItem = [TabBarController defaultTabBarItemView];
-    tabBarItem.title = @"Item";
+    tabBarItem.item.title = @"Item";
     
     return tabBarItem;
 }

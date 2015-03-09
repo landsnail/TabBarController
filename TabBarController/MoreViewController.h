@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MoreViewController : UIViewController
+#import "TabBarController.h"
+
+@interface MoreViewController : UIViewController <TabBarControllerDelegate>
 
 @property (nonatomic, strong) NSArray *viewControllers;
 

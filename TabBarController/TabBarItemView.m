@@ -8,34 +8,58 @@
 
 #import "TabBarItemView.h"
 
-@interface TabBarItemView ()
-
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *iconImage;
-
-@end
-
 @implementation TabBarItemView
 
-#pragma mark - Custom setters
-
-- (void)setTitle:(NSString *)title
+- (void)awakeFromNib
 {
-    if (_title != title) {
-        _title = title;
-        self.titleLabel.text = _title;
+    [super awakeFromNib];
+    
+    if (self.item == nil) {
+        self.item = [[TabBarItem alloc] init];
+        self.item.delegate = self;
     }
 }
 
-- (void)setImage:(UIImage *)image
+- (id)init
 {
-    if (_image != image) {
-        _image = image;
-        self.iconImage.image = image;
+    self = [super init];
+    
+    if (self != nil) {
+        self.item = [[TabBarItem alloc] init];
+        self.item.delegate = self;
     }
+    
+    return self;
+}
+
+- (id)initWithItem:(TabBarItem *)item
+{
+    self = [super init];
+    
+    if (self != nil) {
+        self.item = item;
+        self.item.delegate = self;
+        
+        [self updateView];
+    }
+    
+    return self;
+}
+
+#pragma mark - TabBarItemDelegate methods
+
+- (void)itemValueChanged:(id)sender
+{
+    [self updateView];
 }
 
 #pragma mark - Public methods
+
+- (void)updateView
+{
+    self.titleLabel.text = self.item.title;
+    self.iconImage.image = self.item.image;
+}
 
 - (void)setTabBarItemSelected:(BOOL)isSelected
 {

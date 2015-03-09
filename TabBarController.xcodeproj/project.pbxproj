@@ -19,6 +19,7 @@
 		1D5663221AA9FDCA00758414 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D56631F1AA9FDCA00758414 /* MoreViewController.m */; };
 		1D5663231AA9FDCA00758414 /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D5663201AA9FDCA00758414 /* MoreViewController.xib */; };
 		1D5663241AA9FDCA00758414 /* TabBarItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D5663211AA9FDCA00758414 /* TabBarItemView.xib */; };
+		1D5663281AADF54200758414 /* TabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5663271AADF54200758414 /* TabBarItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		1D56631F1AA9FDCA00758414 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		1D5663201AA9FDCA00758414 /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
 		1D5663211AA9FDCA00758414 /* TabBarItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarItemView.xib; sourceTree = "<group>"; };
+		1D5663261AADF54200758414 /* TabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarItem.h; sourceTree = "<group>"; };
+		1D5663271AADF54200758414 /* TabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,7 @@
 			children = (
 				1D5662F31AA9FB9300758414 /* AppDelegate.h */,
 				1D5662F41AA9FB9300758414 /* AppDelegate.m */,
+				1D5663251AADF52200758414 /* Models */,
 				1D5663161AA9FBE800758414 /* Resources */,
 				1D5662EF1AA9FB9300758414 /* Supporting Files */,
 				1D5663151AA9FBB200758414 /* ViewControllers */,
@@ -162,6 +166,15 @@
 				1D56631C1AA9FD5800758414 /* TabBarItemView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		1D5663251AADF52200758414 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1D5663261AADF54200758414 /* TabBarItem.h */,
+				1D5663271AADF54200758414 /* TabBarItem.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +285,7 @@
 				1D5662F51AA9FB9300758414 /* AppDelegate.m in Sources */,
 				1D56631D1AA9FD5800758414 /* TabBarItemView.m in Sources */,
 				1D5662F21AA9FB9300758414 /* main.m in Sources */,
+				1D5663281AADF54200758414 /* TabBarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +478,7 @@
 				1D5663111AA9FB9300758414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1D5663121AA9FB9300758414 /* Build configuration list for PBXNativeTarget "TabBarControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -472,6 +487,7 @@
 				1D5663141AA9FB9300758414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

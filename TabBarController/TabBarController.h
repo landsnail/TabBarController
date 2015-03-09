@@ -17,7 +17,7 @@
 
 @end
 
-@interface TabBarController : UITabBarController
+@interface TabBarController : UITabBarController <UITabBarControllerDelegate, TabBarItemViewDelegate>
 
 + (TabBarItemView *)defaultTabBarItemView;
 

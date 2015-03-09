@@ -12,7 +12,7 @@
 
 #define MAX_TAB_BAR_ITEMS 5
 
-@interface TabBarController () <UITabBarControllerDelegate, TabBarItemViewDelegate>
+@interface TabBarController ()
 
 @property (nonatomic, strong) UIView *tabBarRootView;
 @property (nonatomic, strong) NSArray *tabBarItemViews;
@@ -84,6 +84,10 @@
 
 - (void)setViewControllers:(NSArray *)viewControllers
 {
+    if ([viewControllers count] == 0) {
+        return;
+    }
+    
     NSArray *tabBarControllers;
     
     // Is number of controllers more than 5?
