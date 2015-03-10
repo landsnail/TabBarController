@@ -129,7 +129,10 @@
     CGFloat width = CGRectGetWidth(self.view.frame) / [tabBarControllers count];
     
     UIView *previousView = nil;
-    for (TabBarItemView *tabBarItemView in self.tabBarItemViews) {
+    for (int i = 0; i < [self.viewControllers count]; i ++) {
+        UIViewController <TabBarControllerDelegate> *viewController = [self extractViewController:self.viewControllers[ i ]];
+        
+        TabBarItemView *tabBarItemView = self.tabBarItemViews[ i ];
         tabBarItemView.delegate = self;
         
         [self.tabBarRootView addSubview:tabBarItemView];
@@ -156,6 +159,10 @@
                                                                            multiplier:1.0
                                                                              constant:CGRectGetHeight(self.tabBar.frame)];
         [tabBarItemView addConstraint:heightConstraint];
+        
+        if ([viewController respondsToSelector:@selector(widthTabBarItemView)]) {
+            width = [viewController widthTabBarItemView];
+        }
         
         // Constraint for width
         NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:tabBarItemView
@@ -234,12 +241,7 @@
     }
     
     for (UIViewController <TabBarControllerDelegate> *viewController in self.viewControllers) {
-        UIViewController <TabBarControllerDelegate> *resultVC = viewController;
-        
-        if ([viewController isKindOfClass:[UINavigationController class]]) {
-            NSArray *allVC = ((UINavigationController *)viewController).viewControllers;
-            resultVC = (UIViewController <TabBarControllerDelegate> *)[allVC firstObject];
-        }
+        UIViewController <TabBarControllerDelegate> *resultVC = [self extractViewController:viewController];
         
         if ([resultVC isEqual:senderViewController]) {
             NSInteger index = [self.viewControllers indexOfObject:viewController];
@@ -249,12 +251,7 @@
     }
     
     for (UIViewController <TabBarControllerDelegate> *viewController in self.moreViewControllers) {
-        UIViewController <TabBarControllerDelegate> *resultVC = viewController;
-        
-        if ([viewController isKindOfClass:[UINavigationController class]]) {
-            NSArray *allVC = ((UINavigationController *)viewController).viewControllers;
-            resultVC = (UIViewController <TabBarControllerDelegate> *)[allVC firstObject];
-        }
+        UIViewController <TabBarControllerDelegate> *resultVC = [self extractViewController:viewController];
         
         if ([resultVC isEqual:senderViewController]) {
             NSInteger index = [self.moreViewControllers indexOfObject:viewController];
@@ -268,17 +265,24 @@
 
 #pragma mark - Private methods
 
+- (UIViewController <TabBarControllerDelegate> *)extractViewController:(UIViewController <TabBarControllerDelegate> *)viewController
+{
+    UIViewController <TabBarControllerDelegate> *resultVC = viewController;
+    
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        NSArray *allVC = ((UINavigationController *)viewController).viewControllers;
+        resultVC = [allVC firstObject];
+    }
+    
+    return resultVC;
+}
+
 - (NSArray *)extractTabBarItemsViewFromViewControllers:(NSArray *)viewControllers
 {
     NSMutableArray *moreTabBarItems = [NSMutableArray array];
     
     for (UIViewController <TabBarControllerDelegate> *vc in viewControllers) {
-        UIViewController <TabBarControllerDelegate> *resultVC = vc;
-        
-        if ([vc isKindOfClass:[UINavigationController class]]) {
-            NSArray *allVC = ((UINavigationController *)vc).viewControllers;
-            resultVC = (UIViewController <TabBarControllerDelegate> *)[allVC firstObject];
-        }
+        UIViewController <TabBarControllerDelegate> *resultVC = [self extractViewController:vc];
         
         if ([resultVC respondsToSelector:@selector(tabBarItemView)]) {
             TabBarItemView *tabbarView = [resultVC tabBarItemView];

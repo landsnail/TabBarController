@@ -43,7 +43,7 @@
     self.currentViewController = nil;
     self.currentNavigationController = nil;
     
-    // If we are trying to push UINavigationController?
+    // Are we trying to push UINavigationController?
     if ([viewController isKindOfClass:[UINavigationController class]]) {
         // Yes: extract first view controller from navigation stack
         self.currentNavigationController = (UINavigationController *)viewController;

@@ -13,6 +13,7 @@
 @protocol TabBarControllerDelegate <NSObject>
 
 @optional
+- (CGFloat)widthTabBarItemView;
 - (TabBarItemView *)tabBarItemView;
 
 @end

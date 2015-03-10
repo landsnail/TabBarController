@@ -42,11 +42,19 @@
     if (self != nil) {
         self.item = item;
         self.item.delegate = self;
-        
-        [self updateView];
     }
     
     return self;
+}
+
+#pragma mark - Custom setter methods
+
+- (void)setItem:(TabBarItem *)item
+{
+    if (_item != item) {
+        _item = item;
+        [self updateView];
+    }
 }
 
 #pragma mark - TabBarItemDelegate methods
