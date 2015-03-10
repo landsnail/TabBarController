@@ -1,7 +1,7 @@
 # TabBarController
 
 ## Description
-*TabBarController* is a class for customisation of native *UITabBarController*. 
+**TabBarController** is a class for customisation of native **UITabBarController**. 
 
 ## Supported iOS versions
 - iOS 7
@@ -10,16 +10,16 @@
 ## Benefits
 - Easy configurable view for each tab
 - Dynamically configurable width for each tab
-- Can be configured as native *UITabBarController* from Storyboard
-- Customisable *MoreViewController* page
+- Can be configured as native **UITabBarController** from *Storyboard*
+- Customisable **MoreViewController** page
 
 ## Required files
-- TabBarController (.h, .m) - handle all logic for retrieving *TabBarItemView* from view controllers, displaying and positioning them on the screen.
+- TabBarController (.h, .m) - handle all logic for retrieving **TabBarItemView** from view controllers, displaying and positioning them on the screen.
 - TabBarItemView (.h, .m) - default tab bar item view class
 - TabBarItemView.xib - default Xib view with icon and title
-- TabBarItem (.h, .m) - model for configuration *TabBarItemView* class.
-- MoreViewController (.h, .m) - need to display list of view controllers, if *TabBarController* was inited with more than 5 view controllers
+- TabBarItem (.h, .m) - model for configuration **TabBarItemView** class.
+- MoreViewController (.h, .m) - need to display list of view controllers, if **TabBarController** was inited with more than 5 view controllers
 - MoreViewController.xib - Xib file with table view inside
-- MoreNavigationController (.h, .m) - manage logic if view controllers in *MoreViewController* are already added to *UINavigationController*
+- MoreNavigationController (.h, .m) - manage logic if view controllers in **MoreViewController** are already added to **UINavigationController**
 
 ## How to use
