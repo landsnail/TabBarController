@@ -17,26 +17,23 @@
 
 @implementation MoreNavigationController
 
-- (id)initWithRootViewController:(UIViewController *)rootViewController
-{
-    self = [super initWithRootViewController:rootViewController];
-    
-    if (self != nil) {
-        self.delegate = self;
-    }
-    
-    return self;
-}
+#pragma mark - UINavigationController methods
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
+    // Get view controller which we dismiss
     UIViewController *vc = [super popViewControllerAnimated:animated];
     self.currentViewController = vc;
     
-    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:self.currentViewController];
-    [nc viewControllers];
-    
-    self.currentNavigationController.viewControllers = @[ self.currentViewController ];
+    if (self.currentNavigationController != nil) {
+        // Magic - don't touch. Need to fix problem with releasing view controller if it was added to UINavigationController
+        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:self.currentViewController];
+        // Need this line of code just to remove warning
+        [nc viewControllers];
+        
+        // Restore original state
+        self.currentNavigationController.viewControllers = @[ self.currentViewController ];
+    }
     
     return self.currentViewController;
 }
@@ -46,10 +43,13 @@
     self.currentViewController = nil;
     self.currentNavigationController = nil;
     
+    // If we are trying to push UINavigationController?
     if ([viewController isKindOfClass:[UINavigationController class]]) {
+        // Yes: extract first view controller from navigation stack
         self.currentNavigationController = (UINavigationController *)viewController;
         self.currentViewController = [self.currentNavigationController.viewControllers firstObject];
         
+        // Push exctracted view controller
         [super pushViewController:self.currentViewController animated:animated];
         return;
     }
