@@ -235,15 +235,12 @@
 
 - (TabBarItemView *)tabBarItemViewForViewController:(UIViewController *)senderViewController
 {
-    if ([senderViewController isKindOfClass:[UINavigationController class]]) {
-        NSArray *allVC = ((UINavigationController *)senderViewController).viewControllers;
-        senderViewController = (UIViewController <TabBarControllerDelegate> *)[allVC firstObject];
-    }
+    UIViewController <TabBarControllerDelegate> *extractedViewController = [self extractViewController:senderViewController];
     
     for (UIViewController <TabBarControllerDelegate> *viewController in self.viewControllers) {
         UIViewController <TabBarControllerDelegate> *resultVC = [self extractViewController:viewController];
         
-        if ([resultVC isEqual:senderViewController]) {
+        if ([resultVC isEqual:extractedViewController]) {
             NSInteger index = [self.viewControllers indexOfObject:viewController];
             
             return self.tabBarItemViews[ index ];
@@ -253,7 +250,7 @@
     for (UIViewController <TabBarControllerDelegate> *viewController in self.moreViewControllers) {
         UIViewController <TabBarControllerDelegate> *resultVC = [self extractViewController:viewController];
         
-        if ([resultVC isEqual:senderViewController]) {
+        if ([resultVC isEqual:extractedViewController]) {
             NSInteger index = [self.moreViewControllers indexOfObject:viewController];
             
             return self.moreTabBarItemViews[ index ];
@@ -265,9 +262,9 @@
 
 #pragma mark - Private methods
 
-- (UIViewController <TabBarControllerDelegate> *)extractViewController:(UIViewController <TabBarControllerDelegate> *)viewController
+- (UIViewController <TabBarControllerDelegate> *)extractViewController:(UIViewController *)viewController
 {
-    UIViewController <TabBarControllerDelegate> *resultVC = viewController;
+    UIViewController <TabBarControllerDelegate> *resultVC = (UIViewController <TabBarControllerDelegate> *)viewController;
     
     if ([viewController isKindOfClass:[UINavigationController class]]) {
         NSArray *allVC = ((UINavigationController *)viewController).viewControllers;

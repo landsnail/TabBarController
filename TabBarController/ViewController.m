@@ -12,11 +12,6 @@
 
 @implementation ViewController
 
-- (void)dealloc
-{
-    NSLog(@"Dealloc");
-}
-
 #pragma mark - TabBarControllerDelegate methods
 
 - (TabBarItemView *)tabBarItemView
