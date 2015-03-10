@@ -13,6 +13,8 @@
 @interface MoreViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIViewController *lastVC;
+@property (nonatomic, strong) UINavigationController *lastNavVC;
 
 @end
 
@@ -68,12 +70,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIViewController *viewController = self.viewControllers[ indexPath.row ];
-    
-    if ([viewController isKindOfClass:[UINavigationController class]]) {
-        NSArray *allVC = ((UINavigationController *)viewController).viewControllers;
-        viewController = [allVC firstObject];
-    }
-    
+        
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

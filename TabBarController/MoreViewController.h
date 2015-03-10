@@ -12,6 +12,6 @@
 
 @interface MoreViewController : UIViewController <TabBarControllerDelegate>
 
-@property (nonatomic, strong) NSArray *viewControllers;
+@property (nonatomic, copy) NSArray *viewControllers;
 
 @end

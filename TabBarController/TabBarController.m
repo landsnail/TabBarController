@@ -9,6 +9,7 @@
 #import "TabBarController.h"
 
 #import "MoreViewController.h"
+#import "MoreNavigationController.h"
 
 #define MAX_TAB_BAR_ITEMS 5
 
@@ -299,7 +300,7 @@
     // Set list of view controllers
     moreVC.viewControllers = self.moreViewControllers;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:moreVC];
+    MoreNavigationController *navigationController = [[MoreNavigationController alloc] initWithRootViewController:moreVC];
     
     return navigationController;
 }

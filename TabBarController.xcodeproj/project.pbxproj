@@ -20,6 +20,7 @@
 		1D5663231AA9FDCA00758414 /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D5663201AA9FDCA00758414 /* MoreViewController.xib */; };
 		1D5663241AA9FDCA00758414 /* TabBarItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D5663211AA9FDCA00758414 /* TabBarItemView.xib */; };
 		1D5663281AADF54200758414 /* TabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5663271AADF54200758414 /* TabBarItem.m */; };
+		1DA076A11AAF0E1000835CA5 /* MoreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA076A01AAF0E1000835CA5 /* MoreNavigationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		1D5663211AA9FDCA00758414 /* TabBarItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarItemView.xib; sourceTree = "<group>"; };
 		1D5663261AADF54200758414 /* TabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarItem.h; sourceTree = "<group>"; };
 		1D5663271AADF54200758414 /* TabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarItem.m; sourceTree = "<group>"; };
+		1DA0769F1AAF0E1000835CA5 /* MoreNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreNavigationController.h; sourceTree = "<group>"; };
+		1DA076A01AAF0E1000835CA5 /* MoreNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreNavigationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 		1D5663151AA9FBB200758414 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1DA0769F1AAF0E1000835CA5 /* MoreNavigationController.h */,
+				1DA076A01AAF0E1000835CA5 /* MoreNavigationController.m */,
 				1D56631E1AA9FDCA00758414 /* MoreViewController.h */,
 				1D56631F1AA9FDCA00758414 /* MoreViewController.m */,
 				1D5663171AA9FC5400758414 /* TabBarController.h */,
@@ -283,6 +288,7 @@
 				1D5663221AA9FDCA00758414 /* MoreViewController.m in Sources */,
 				1D5663191AA9FC5400758414 /* TabBarController.m in Sources */,
 				1D5662F51AA9FB9300758414 /* AppDelegate.m in Sources */,
+				1DA076A11AAF0E1000835CA5 /* MoreNavigationController.m in Sources */,
 				1D56631D1AA9FD5800758414 /* TabBarItemView.m in Sources */,
 				1D5662F21AA9FB9300758414 /* main.m in Sources */,
 				1D5663281AADF54200758414 /* TabBarItem.m in Sources */,
