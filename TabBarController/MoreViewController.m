@@ -37,6 +37,7 @@
 {
     TabBarItemView *tabBarItem = [TabBarController defaultTabBarItemView];
     tabBarItem.item.title = @"More";
+    tabBarItem.item.image = [UIImage imageNamed:@"dot-more-7"];
     
     return tabBarItem;
 }
@@ -59,6 +60,7 @@
     TabBarItemView *tabBarItemView = [tabBarController tabBarItemViewForViewController:self.viewControllers[ indexPath.row ]];
     
     cell.textLabel.text = tabBarItemView.item.title;
+    cell.imageView.image = tabBarItemView.item.image;
     
     cell.exclusiveTouch = YES;
     

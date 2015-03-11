@@ -18,6 +18,7 @@
 {
     TabBarItemView *tabBarItem = [TabBarController defaultTabBarItemView];
     tabBarItem.item.title = @"Item";
+    tabBarItem.item.image = [UIImage imageNamed:@"character-a-7"];
     
     return tabBarItem;
 }
