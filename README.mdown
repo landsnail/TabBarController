@@ -17,7 +17,7 @@
 - TabBarController [.h, .m] - handle all logic for retrieving **TabBarItemView** from view controllers, displaying and positioning them on the screen. Inherited from **UITabBarController**
 - TabBarItemView [.h, .m] - default tab bar item view class. Inherited from **UIView**
 - TabBarItemView.xib - default Xib view with icon and title
-- TabBarItem [.h, .m] - model for configuration **TabBarItemView** class.
+- TabBarItem [.h, .m] - model to configure **TabBarItemView** class
 - MoreViewController [.h, .m] - need to display list of view controllers, if **TabBarController** was inited with more than 5 view controllers
 - MoreViewController.xib - Xib file with table view inside
 - MoreNavigationController [.h, .m] - manage logic if view controller in **MoreViewController** is already added to **UINavigationController**. Inherited from **UINavigationController**
@@ -26,3 +26,12 @@
 
 1. Create instance of **TabBarController** (can be also created from *Storyboard*)
 1. Implement **tabBarItemView** method in your view controller classes
+
+## Screenshots 
+
+![alt text](https://cloud.githubusercontent.com/assets/1679724/6594286/74cb6afa-c7e8-11e4-8b93-844f855c0e91.png "iPhone Portrait")
+![alt text](https://cloud.githubusercontent.com/assets/1679724/6594285/74b7743c-c7e8-11e4-801f-c1d61ebf2a83.png "iPhone Landscape")
+![alt text](https://cloud.githubusercontent.com/assets/1679724/6594287/74cb9606-c7e8-11e4-9153-c20a97316361.png "iPhone More Page")
+![alt text](https://cloud.githubusercontent.com/assets/1679724/6594289/74d14646-c7e8-11e4-9499-9125eb87fe22.png "iPhone More Page")
+![alt text](https://cloud.githubusercontent.com/assets/1679724/6594284/749fe6be-c7e8-11e4-8d94-c9db817c980c.png "iPad Portrait")
+![alt text](https://cloud.githubusercontent.com/assets/1679724/6594288/74cfd194-c7e8-11e4-8e1c-1e97bd5a411b.png "iPad Landscape")
