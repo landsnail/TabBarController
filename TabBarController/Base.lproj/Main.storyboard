@@ -171,7 +171,22 @@
                     <view key="view" contentMode="scaleToFill" id="f7v-OF-dID">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hxa-v1-jfy">
+                                <rect key="frame" x="277" y="72" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="fl5-xJ-iij" kind="show" id="z39-P0-uyj"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Hxa-v1-jfy" secondAttribute="centerX" id="gGf-R2-T2A"/>
+                            <constraint firstItem="Hxa-v1-jfy" firstAttribute="top" secondItem="TWU-1c-tjz" secondAttribute="bottom" constant="8" id="mCa-d7-wh6"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="PLo-fy-vQO"/>
                     <navigationItem key="navigationItem" id="8iU-zL-mgL"/>
@@ -179,6 +194,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="roK-eT-K6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1789" y="1160"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="P6I-cV-DD7">
+            <objects>
+                <viewController id="jgW-rk-KFi" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="daA-WP-j1u"/>
+                        <viewControllerLayoutGuide type="bottom" id="sK5-ZD-kl9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ft8-KV-x09">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HpQ-vN-BQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3483" y="1160"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="g0R-Z3-0MC">
+            <objects>
+                <viewController id="fl5-xJ-iij" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rpr-gN-qX1"/>
+                        <viewControllerLayoutGuide type="bottom" id="111-q1-xbq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fIk-lo-WQi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpK-gG-RIS">
+                                <rect key="frame" x="277" y="72" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="jgW-rk-KFi" kind="show" id="IV3-nN-wrc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="hpK-gG-RIS" secondAttribute="centerX" id="knq-oD-xhI"/>
+                            <constraint firstItem="hpK-gG-RIS" firstAttribute="top" secondItem="Rpr-gN-qX1" secondAttribute="bottom" constant="8" id="pye-Ow-X1V"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r8l-1U-Mch" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2617" y="1160"/>
         </scene>
         <!--Item-->
         <scene sceneID="VeU-p8-V1V">

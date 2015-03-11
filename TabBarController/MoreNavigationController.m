@@ -21,6 +21,10 @@
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
+    if ([self.viewControllers count] > 2) {
+        return [super popViewControllerAnimated:animated];
+    }
+    
     // Get view controller which we dismiss
     UIViewController *vc = [super popViewControllerAnimated:animated];
     self.currentViewController = vc;
@@ -40,6 +44,11 @@
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    if ([self.viewControllers count] >= 2) {
+        [super pushViewController:viewController animated:animated];
+        return;
+    }
+    
     self.currentViewController = nil;
     self.currentNavigationController = nil;
     
