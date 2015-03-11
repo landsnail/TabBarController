@@ -14,12 +14,15 @@
 - Customisable **MoreViewController** page
 
 ## Required files
-- TabBarController (.h, .m) - handle all logic for retrieving **TabBarItemView** from view controllers, displaying and positioning them on the screen.
-- TabBarItemView (.h, .m) - default tab bar item view class
+- TabBarController [.h, .m] - handle all logic for retrieving **TabBarItemView** from view controllers, displaying and positioning them on the screen. Inherited from **UITabBarController**
+- TabBarItemView [.h, .m] - default tab bar item view class. Inherited from **UIView**
 - TabBarItemView.xib - default Xib view with icon and title
-- TabBarItem (.h, .m) - model for configuration **TabBarItemView** class.
-- MoreViewController (.h, .m) - need to display list of view controllers, if **TabBarController** was inited with more than 5 view controllers
+- TabBarItem [.h, .m] - model for configuration **TabBarItemView** class.
+- MoreViewController [.h, .m] - need to display list of view controllers, if **TabBarController** was inited with more than 5 view controllers
 - MoreViewController.xib - Xib file with table view inside
-- MoreNavigationController (.h, .m) - manage logic if view controllers in **MoreViewController** are already added to **UINavigationController**
+- MoreNavigationController [.h, .m] - manage logic if view controller in **MoreViewController** is already added to **UINavigationController**. Inherited from **UINavigationController**
 
 ## How to use
+
+1. Create instance of **TabBarController** (can be also created from *Storyboard*)
+1. Implement **tabBarItemView** method in your view controller classes
