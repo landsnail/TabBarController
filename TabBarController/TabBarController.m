@@ -11,7 +11,8 @@
 #import "MoreViewController.h"
 #import "MoreNavigationController.h"
 
-#define MAX_TAB_BAR_ITEMS 5
+#define MAX_TAB_BAR_ITEMS_IPAD 8
+#define MAX_TAB_BAR_ITEMS_IPHONE 5
 
 @interface TabBarController ()
 
@@ -248,14 +249,19 @@
 {
     NSArray *tabBarControllers;
     
+    NSInteger numberOfTabs = MAX_TAB_BAR_ITEMS_IPHONE;
+    if( [[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPad ) {
+        numberOfTabs = MAX_TAB_BAR_ITEMS_IPAD;
+    }
+    
     // Is number of controllers more than 5?
-    if ([viewControllers count] > MAX_TAB_BAR_ITEMS) {
+    if ([viewControllers count] > numberOfTabs) {
         // Yes: extract view controllers from first item till 4-th
-        NSRange range = NSMakeRange(0, MAX_TAB_BAR_ITEMS - 1);
+        NSRange range = NSMakeRange(0, numberOfTabs - 1);
         tabBarControllers = [viewControllers subarrayWithRange:range];
         
         // Save view controlles in separate array from index #4 to the last
-        range = NSMakeRange(MAX_TAB_BAR_ITEMS - 1, [viewControllers count] - MAX_TAB_BAR_ITEMS + 1);
+        range = NSMakeRange(numberOfTabs - 1, [viewControllers count] - numberOfTabs + 1);
         
         self.moreViewControllers = [viewControllers subarrayWithRange:range];
         
