@@ -89,117 +89,8 @@
         return;
     }
     
-    NSArray *tabBarControllers;
-    
-    // Is number of controllers more than 5?
-    if ([viewControllers count] > MAX_TAB_BAR_ITEMS) {
-        // Yes: extract view controllers from first item till 4-th
-        NSRange range = NSMakeRange(0, MAX_TAB_BAR_ITEMS - 1);
-        tabBarControllers = [viewControllers subarrayWithRange:range];
-        
-        // Save view controlles in separate array from index #4 to the last
-        range = NSMakeRange(MAX_TAB_BAR_ITEMS - 1, [viewControllers count] - MAX_TAB_BAR_ITEMS + 1);
-        
-        self.moreViewControllers = [viewControllers subarrayWithRange:range];
-        
-        // Cache tab bar item views
-        self.moreTabBarItemViews = [self extractTabBarItemsViewFromViewControllers:self.moreViewControllers];
-        
-        // Add MoreViewController to the last tab
-        tabBarControllers = [tabBarControllers arrayByAddingObject:[self moreViewController]];
-    }
-    else {
-        tabBarControllers = [NSArray arrayWithArray:viewControllers];
-    }
-    
-    // Call super method
-    [super setViewControllers:tabBarControllers];
-    
-    // Remove all previously added views
-    for (UIView *subView in self.tabBarRootView.subviews) {
-        if ([subView isMemberOfClass:[TabBarItemView class]]) {
-            [subView removeFromSuperview];
-        }
-    }
-    
-    // Cache tab bar item views from More tab
-    self.tabBarItemViews = [self extractTabBarItemsViewFromViewControllers:tabBarControllers];
-    
-    // Calculate width for the tab bar item
-    CGFloat width = CGRectGetWidth(self.view.frame) / [tabBarControllers count];
-    
-    UIView *previousView = nil;
-    for (int i = 0; i < [self.viewControllers count]; i ++) {
-        UIViewController <TabBarControllerDelegate> *viewController = [self extractViewController:self.viewControllers[ i ]];
-        
-        TabBarItemView *tabBarItemView = self.tabBarItemViews[ i ];
-        tabBarItemView.delegate = self;
-        
-        [self.tabBarRootView addSubview:tabBarItemView];
-        
-        // Need to add NSLayoutConstraint manually
-        tabBarItemView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        NSArray *subConstraints;
-        NSDictionary *viewsDictionary;
-        
-        if (previousView == nil) {
-            viewsDictionary = @{ @"tabBarItem" : tabBarItemView };
-        }
-        else {
-            viewsDictionary = @{ @"tabBarItem" : tabBarItemView, @"previousView" : previousView };
-        }
-        
-        // Constraint for height
-        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:tabBarItemView
-                                                                            attribute:NSLayoutAttributeHeight
-                                                                            relatedBy:NSLayoutRelationEqual
-                                                                               toItem:nil
-                                                                            attribute:NSLayoutAttributeNotAnAttribute
-                                                                           multiplier:1.0
-                                                                             constant:CGRectGetHeight(self.tabBar.frame)];
-        [tabBarItemView addConstraint:heightConstraint];
-        
-        if ([viewController respondsToSelector:@selector(widthTabBarItemView)]) {
-            width = [viewController widthTabBarItemView];
-        }
-        
-        // Constraint for width
-        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:tabBarItemView
-                                                                           attribute:NSLayoutAttributeWidth
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:nil
-                                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1.0
-                                                                            constant:width];
-        [tabBarItemView addConstraint:widthConstraint];
-        tabBarItemView.widthConstraint = widthConstraint;
-        
-        if (previousView == nil) {
-            // Leading space to super view
-            subConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tabBarItem]"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:viewsDictionary];
-        }
-        else {
-            // Set constraints to the current and previous view
-            subConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[previousView][tabBarItem]"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:viewsDictionary];
-        }
-        [self.tabBarRootView addConstraints:subConstraints];
-        
-        // Set constraints to the bottom of the super view
-        subConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[tabBarItem]|"
-                                                                 options:0
-                                                                 metrics:nil
-                                                                   views:viewsDictionary];
-        [self.tabBarRootView addConstraints:subConstraints];
-        
-        previousView = tabBarItemView;
-    }
+    [self manageViewControllersInTabBar:viewControllers];
+    [self configureTabBarItemViews];
     
     self.selectedIndex = 0;
 }
@@ -262,6 +153,126 @@
 
 #pragma mark - Private methods
 
+- (void)configureTabBarItemViews
+{
+    // Remove all previously added views
+    for (UIView *subView in self.tabBarRootView.subviews) {
+        if ([subView isKindOfClass:[TabBarItemView class]]) {
+            [subView removeFromSuperview];
+        }
+    }
+    
+    // Cache tab bar item views from More tab
+    self.tabBarItemViews = [self extractTabBarItemsViewFromViewControllers:self.viewControllers];
+    
+    // Calculate width for the tab bar item
+    CGFloat width = CGRectGetWidth(self.view.frame) / [self.viewControllers count];
+    
+    UIView *previousView = nil;
+    for (int i = 0; i < [self.viewControllers count]; i ++) {
+        UIViewController <TabBarControllerDelegate> *viewController = [self extractViewController:self.viewControllers[ i ]];
+        
+        TabBarItemView *tabBarItemView = self.tabBarItemViews[ i ];
+        tabBarItemView.delegate = self;
+        
+        [self.tabBarRootView addSubview:tabBarItemView];
+        
+        // Need to add NSLayoutConstraint manually
+        tabBarItemView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        NSArray *subConstraints;
+        NSDictionary *viewsDictionary;
+        
+        if (previousView == nil) {
+            viewsDictionary = @{ @"tabBarItem" : tabBarItemView };
+        }
+        else {
+            viewsDictionary = @{ @"tabBarItem" : tabBarItemView, @"previousView" : previousView };
+        }
+        
+        // Constraint for height
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:tabBarItemView
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1.0
+                                                                             constant:CGRectGetHeight(self.tabBar.frame)];
+        [tabBarItemView addConstraint:heightConstraint];
+        
+        // Is width for tabBarItem should be custom?
+        if ([viewController respondsToSelector:@selector(widthTabBarItemView)]) {
+            // Yes: get value from delegate
+            width = [viewController widthTabBarItemView];
+        }
+        
+        // Constraint for width
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:tabBarItemView
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
+                                                                            constant:width];
+        [tabBarItemView addConstraint:widthConstraint];
+        tabBarItemView.widthConstraint = widthConstraint;
+        
+        if (previousView == nil) {
+            // Leading space to super view
+            subConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tabBarItem]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:viewsDictionary];
+        }
+        else {
+            // Set constraints to the current and previous view
+            subConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[previousView][tabBarItem]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:viewsDictionary];
+        }
+        [self.tabBarRootView addConstraints:subConstraints];
+        
+        // Set constraints to the bottom of the super view
+        subConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[tabBarItem]|"
+                                                                 options:0
+                                                                 metrics:nil
+                                                                   views:viewsDictionary];
+        [self.tabBarRootView addConstraints:subConstraints];
+        
+        previousView = tabBarItemView;
+    }
+}
+
+- (void)manageViewControllersInTabBar:(NSArray *)viewControllers
+{
+    NSArray *tabBarControllers;
+    
+    // Is number of controllers more than 5?
+    if ([viewControllers count] > MAX_TAB_BAR_ITEMS) {
+        // Yes: extract view controllers from first item till 4-th
+        NSRange range = NSMakeRange(0, MAX_TAB_BAR_ITEMS - 1);
+        tabBarControllers = [viewControllers subarrayWithRange:range];
+        
+        // Save view controlles in separate array from index #4 to the last
+        range = NSMakeRange(MAX_TAB_BAR_ITEMS - 1, [viewControllers count] - MAX_TAB_BAR_ITEMS + 1);
+        
+        self.moreViewControllers = [viewControllers subarrayWithRange:range];
+        
+        // Cache tab bar item views
+        self.moreTabBarItemViews = [self extractTabBarItemsViewFromViewControllers:self.moreViewControllers];
+        
+        // Add MoreViewController to the last tab
+        tabBarControllers = [tabBarControllers arrayByAddingObject:[self moreViewController]];
+    }
+    else {
+        tabBarControllers = [NSArray arrayWithArray:viewControllers];
+    }
+    
+    // Call super method
+    [super setViewControllers:tabBarControllers];
+}
+
 - (UIViewController <TabBarControllerDelegate> *)extractViewController:(UIViewController *)viewController
 {
     UIViewController <TabBarControllerDelegate> *resultVC = (UIViewController <TabBarControllerDelegate> *)viewController;
@@ -314,7 +325,16 @@
     
     CGFloat width = size.width / [self.viewControllers count];
     
-    for (TabBarItemView *tabBarItemView in self.tabBarItemViews) {
+    for (int i = 0; i < [self.viewControllers count]; i ++) {
+        UIViewController <TabBarControllerDelegate> *viewController = [self extractViewController:self.viewControllers[ i ]];
+        TabBarItemView *tabBarItemView = self.tabBarItemViews[ i ];
+        
+        // Is width for tabBarItem should be custom?
+        if ([viewController respondsToSelector:@selector(widthTabBarItemView)]) {
+            // Yes: get value from delegate
+            width = [viewController widthTabBarItemView];
+        }
+        
         tabBarItemView.widthConstraint.constant = width;
     }
 }
