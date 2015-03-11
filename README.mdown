@@ -1,7 +1,7 @@
 # TabBarController
 
 ## Description
-**TabBarController** is a class for customisation of native **UITabBarController**. 
+**TabBarController** is a class for customisation of native **UITabBarController**. Support iPhone & iPad devices.
 
 ## Supported iOS versions
 - iOS 7
